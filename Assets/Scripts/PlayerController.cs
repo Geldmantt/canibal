@@ -73,17 +73,18 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (hit.collider.GetComponent<Key>())
+
+            if (Input.GetKeyDown(KeyCode.E) && hit.collider.tag == "Item")
             {
-                tip.text = hit.collider.GetComponent<Key>().name;
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    pnd.PickUp(hit.collider.gameObject);
-                }
+                pnd.PickUp(hit.collider.gameObject);
             }
-            else
+
+            if (Input.GetKeyDown(KeyCode.E) && hit.collider.GetComponent<Water>())
             {
-                tip.text = null;
+                if (hit.collider.GetComponent<Water>().canPickWater == true)
+                {
+                    pnd.obj.GetComponent<Bucket>().isFull = true;
+                }
             }
 
             if (hit.collider.GetComponent<Lock>())
